@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RetailStock | Inventory Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+<div class="brand"><div class="brand-icon">R</div><div><strong>RetailStock</strong><span>Inventory System</span></div></div>
+<nav>
+<button class="nav-item active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+<button class="nav-item" data-page="products">▣ <span>Products</span></button>
+<button class="nav-item" data-page="stock">⇅ <span>Stock Management</span></button>
+<button class="nav-item" data-page="movements">☷ <span>Movements</span></button>
+<button class="nav-item" data-page="alerts">⚠ <span>Alerts</span><b id="alertBadge">0</b></button>
+<button class="nav-item" data-page="reports">◒ <span>Reports</span></button>
+</nav>
+<div class="sidebar-bottom"><div class="connection"><i></i><span>Backend connected</span></div><small>Spring Boot API · Port 8080</small></div>
+</aside>
+
+<main class="main">
+<header class="topbar"><div><h1 id="pageTitle">Dashboard</h1><p id="pageSubtitle">Inventory overview and recent activity</p></div>
+<div class="top-actions"><button class="icon-btn" id="refreshBtn">↻</button><div class="profile"><div class="avatar">A</div><div><strong>Admin</strong><small>Inventory Manager</small></div></div></div></header>
+
+<section id="page-dashboard" class="page active">
+<div class="welcome"><div><span class="eyebrow">INVENTORY CONTROL CENTER</span><h2>Good evening 👋</h2><p>Monitor stock, movements and alerts from one place.</p></div><button class="primary" data-page-jump="products">+ Add Product</button></div>
+<div class="stats">
+<div class="stat-card"><div class="stat-icon blue">▣</div><div><span>Total Products</span><strong id="statProducts">0</strong></div></div>
+<div class="stat-card"><div class="stat-icon purple">▤</div><div><span>Total Stock</span><strong id="statStock">0</strong></div></div>
+<div class="stat-card"><div class="stat-icon orange">⚠</div><div><span>Low Stock</span><strong id="statAlerts">0</strong></div></div>
+<div class="stat-card"><div class="stat-icon green">⇅</div><div><span>Movements</span><strong id="statMovements">0</strong></div></div>
+</div>
+<div class="grid-2">
+<div class="panel"><div class="panel-head"><div><h3>Stock Overview</h3><p>Current inventory by product</p></div></div><div id="stockBars" class="bars empty">No products yet</div></div>
+<div class="panel"><div class="panel-head"><div><h3>Low Stock Alerts</h3><p>Items needing attention</p></div><button class="link-btn" data-page-jump="alerts">View all</button></div><div id="dashboardAlerts"></div></div>
+</div>
+<div class="panel"><div class="panel-head"><div><h3>Recent Movements</h3><p>Latest inventory transactions</p></div><button class="link-btn" data-page-jump="movements">View history</button></div><div id="recentMovements"></div></div>
+</section>
+
+<section id="page-products" class="page"><div class="page-actions"><div class="search"><span>⌕</span><input id="productSearch" placeholder="Search products..."></div><button class="primary" id="addProductBtn">+ Add Product</button></div><div class="panel"><div id="productsTable"></div></div></section>
+
+<section id="page-stock" class="page"><div class="grid-2">
+<div class="panel form-panel"><h3>Stock In</h3><p>Add incoming stock to a product.</p><form id="stockInForm"><label>Product<select id="stockInProduct" required></select></label><label>Quantity<input id="stockInQty" type="number" min="1" required></label><button class="primary full">Add Stock</button></form></div>
+<div class="panel form-panel"><h3>Stock Out</h3><p>Record stock leaving the inventory.</p><form id="stockOutForm"><label>Product<select id="stockOutProduct" required></select></label><label>Quantity<input id="stockOutQty" type="number" min="1" required></label><button class="danger full">Remove Stock</button></form></div>
+</div></section>
+
+<section id="page-movements" class="page"><div class="panel"><div class="panel-head"><div><h3>Stock Movement History</h3><p>All recorded stock transactions</p></div></div><div id="movementsTable"></div></div></section>
+<section id="page-alerts" class="page"><div id="alertsList" class="alert-list"></div></section>
+<section id="page-reports" class="page">
+<div class="panel form-panel"><h3>Fast-Moving Products</h3><p>Choose a date range to generate the report.</p><form id="reportForm" class="report-form"><label>From<input id="reportFrom" type="date" required></label><label>To<input id="reportTo" type="date" required></label><button class="primary">Generate Report</button></form></div>
+<div class="panel"><div id="reportResult"><div class="empty-state">Generate a report to see results.</div></div></div>
+</section>
+</main></div>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle">Add Product</h3><button id="closeModal">×</button></div>
+<form id="productForm"><input type="hidden" id="productId"><label>Product Code<input id="productCode" required placeholder="P002"></label><label>Product Name<input id="productName" required placeholder="Keyboard"></label><label>Price<input id="productPrice" type="number" step="0.01" min="0" required></label><label>Current Stock<input id="productStock" type="number" min="0" required></label><label>Reorder Level<input id="productReorder" type="number" min="0" required></label><div class="modal-actions"><button type="button" class="secondary" id="cancelModal">Cancel</button><button class="primary">Save Product</button></div></form></div></div>
+<div id="toast" class="toast"></div>
+<script src="js/app.js"></script>
+</body></html>
