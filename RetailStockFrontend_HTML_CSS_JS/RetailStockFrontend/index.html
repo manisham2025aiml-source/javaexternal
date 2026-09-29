@@ -10,7 +10,41 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="app-shell">
+<section id="authScreen" class="auth-screen">
+<div class="auth-layout">
+<aside class="auth-aside">
+<div class="auth-brand"><span class="brand-icon">R</span><span><strong>RetailStock</strong><small>Inventory System</small></span></div>
+<div class="auth-message-block"><span class="eyebrow">PRIVATE INVENTORY WORKSPACE</span><h1>Stock in view.<br>Business in motion.</h1><p>Sign in to manage products, track movement and stay ahead of low-stock alerts.</p></div>
+<div class="auth-aside-footer"><span class="auth-status-dot"></span> Secure workspace <span>·</span> Spring Boot</div>
+</aside>
+<main class="auth-form-pane">
+<div class="auth-content">
+<p class="auth-kicker">YOUR INVENTORY, READY</p>
+<h2 id="authTitle">Welcome back</h2>
+<p id="authSubtitle" class="auth-subtitle">Sign in to continue to your workspace.</p>
+<div class="auth-tabs" role="tablist" aria-label="Account access">
+<button type="button" class="auth-tab active" data-auth-mode="login" role="tab" aria-selected="true">Sign in</button>
+<button type="button" class="auth-tab" data-auth-mode="register" role="tab" aria-selected="false">Create account</button>
+</div>
+<form id="loginForm" class="auth-form">
+<label>Email address<input id="loginEmail" type="email" autocomplete="email" placeholder="you@company.com" required></label>
+<label>Password<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required></label>
+<button class="primary auth-submit" type="submit">Sign in <span aria-hidden="true">→</span></button>
+</form>
+<form id="registerForm" class="auth-form" hidden>
+<label>Your name<input id="registerName" type="text" autocomplete="name" maxlength="80" placeholder="Alex Morgan" required></label>
+<label>Email address<input id="registerEmail" type="email" autocomplete="email" maxlength="254" placeholder="you@company.com" required></label>
+<label>Password<input id="registerPassword" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="At least 8 characters" required></label>
+<label>Confirm password<input id="registerConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="Enter it again" required></label>
+<button class="primary auth-submit" type="submit">Create account <span aria-hidden="true">→</span></button>
+</form>
+<p id="authNotice" class="auth-notice" aria-live="polite"></p>
+<p class="auth-footnote">Your password is encrypted and never stored in plain text.</p>
+</div>
+</main>
+</div>
+</section>
+<div class="app-shell" id="appShell" hidden>
 <aside class="sidebar">
 <div class="brand"><div class="brand-icon">R</div><div><strong>RetailStock</strong><span>Inventory System</span></div></div>
 <nav>
@@ -26,7 +60,7 @@
 
 <main class="main">
 <header class="topbar"><div><h1 id="pageTitle">Dashboard</h1><p id="pageSubtitle">Inventory overview and recent activity</p></div>
-<div class="top-actions"><button class="icon-btn" id="refreshBtn">↻</button><div class="profile"><div class="avatar">A</div><div><strong>Admin</strong><small>Inventory Manager</small></div></div></div></header>
+<div class="top-actions"><button class="icon-btn" id="refreshBtn" aria-label="Refresh inventory" title="Refresh inventory">↻</button><div class="profile"><div class="avatar" id="profileAvatar">A</div><div><strong id="profileName">Manager</strong><small id="profileEmail">Inventory Manager</small></div></div><button class="logout-btn" id="logoutBtn" type="button">Sign out</button></div></header>
 
 <section id="page-dashboard" class="page active">
 <div class="welcome"><div><span class="eyebrow">INVENTORY CONTROL CENTER</span><h2>Good evening 👋</h2><p>Monitor stock, movements and alerts from one place.</p></div><button class="primary" data-page-jump="products">+ Add Product</button></div>
