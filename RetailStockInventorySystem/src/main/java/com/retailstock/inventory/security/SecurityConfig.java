@@ -20,6 +20,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
 
 @Configuration
 public class SecurityConfig {
+    @SuppressWarnings("null")
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http,
             SecurityContextRepository securityContextRepository,
@@ -30,7 +31,8 @@ public class SecurityConfig {
                         .ignoringRequestMatchers("/h2-console/**"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index.html", "/css/**", "/js/**",
-                                "/api/auth/csrf", "/api/auth/register", "/api/auth/login").permitAll()
+                                "/api/auth/csrf", "/api/auth/register", "/api/auth/login",
+                                "/api/auth/me").permitAll()
                         .requestMatchers("/h2-console/**").authenticated()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint(

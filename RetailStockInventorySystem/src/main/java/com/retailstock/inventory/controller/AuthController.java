@@ -93,10 +93,14 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public AuthResponse me(Authentication authentication) {
+    public ResponseEntity<AuthResponse> me(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()
+                || "anonymousUser".equals(authentication.getName())) {
+            return ResponseEntity.noContent().build();
+        }
         AppUser user = users.findByEmailIgnoreCase(authentication.getName())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
-        return response(user);
+        return ResponseEntity.ok(response(user));
     }
 
     @PostMapping("/logout")

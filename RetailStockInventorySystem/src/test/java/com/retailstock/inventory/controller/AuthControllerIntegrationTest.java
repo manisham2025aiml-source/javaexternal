@@ -36,6 +36,9 @@ class AuthControllerIntegrationTest {
                 {"name":"Retail Manager","email":"%s","password":"secure-pass-123"}
                 """.formatted(email);
 
+        mockMvc.perform(get("/api/auth/me"))
+                .andExpect(status().isNoContent());
+
         mockMvc.perform(get("/api/products"))
                 .andExpect(status().isUnauthorized());
 
