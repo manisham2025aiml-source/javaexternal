@@ -16,6 +16,7 @@ public class ProductController {
     @GetMapping
     public List<Product> all() { return service.getAllProducts(); }
 
+    @SuppressWarnings("null")
     @GetMapping("/{id}")
     public Product one(@PathVariable Long id) { return service.getProduct(id); }
 
