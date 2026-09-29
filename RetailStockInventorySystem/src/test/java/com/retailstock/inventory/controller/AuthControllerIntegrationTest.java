@@ -28,6 +28,7 @@ class AuthControllerIntegrationTest {
     @Autowired
     private AppUserRepository users;
 
+    @SuppressWarnings("null")
     @Test
     void registrationLoginAndLogoutProtectInventoryEndpoints() throws Exception {
         String email = "manager-" + UUID.randomUUID() + "@example.com";
@@ -54,6 +55,7 @@ class AuthControllerIntegrationTest {
                         .content(registration))
                 .andExpect(status().isConflict());
 
+        @SuppressWarnings("null")
         MvcResult login = mockMvc.perform(post("/api/auth/login")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
